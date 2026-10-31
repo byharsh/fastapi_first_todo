@@ -9,10 +9,5 @@ app = FastAPI()
 database_model.Base.metadata.create_all(bind=engine)
 
 
-def init_db():
-    db = session()
-    db.query()
-    db.commit()
 
 
-init_db()
