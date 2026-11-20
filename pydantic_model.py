@@ -17,10 +17,12 @@ class TodoCreate(BaseModel):
 
 
 class TodoUpdate(BaseModel):
-    title: str | None
-    is_completed: bool | None = False
+    title: str | None = None
+    is_completed: bool | None = None
+    category: str | None = None
 
 
+# for post, put and create opearation response model.
 class TodoResponse(TodoBase):
     id: int
     title: str
@@ -28,3 +30,7 @@ class TodoResponse(TodoBase):
     created_at: datetime
     category: str
     is_expired: bool
+
+
+class TodoResponseMessage(BaseModel):
+    message: str

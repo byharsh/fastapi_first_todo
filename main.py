@@ -32,7 +32,7 @@ def create_todo(
     return new_todo
 
 
-@app.delete("/todo/{todo_id}", response_model=pydantic_model.TodoResponse)
+@app.delete("/todo/{todo_id}", response_model=pydantic_model.TodoResponseMessage)
 def delete_todo(todo_id: int, db: Annotated[Session, Depends(get_db)]):
     todo = (
         db.query(database_model.todo).filter(database_model.todo.id == todo_id).first()
@@ -40,7 +40,7 @@ def delete_todo(todo_id: int, db: Annotated[Session, Depends(get_db)]):
     if todo:
         db.delete(todo)
         db.commit()
-        db.refresh(todo)
+        # db.refresh(todo)
         return {"message": "Todo deleted successfully"}
     else:
         return {"message": "Todo not found"}
