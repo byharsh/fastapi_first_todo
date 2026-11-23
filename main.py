@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 import database_model
@@ -9,6 +10,7 @@ from config import engine, get_db
 
 app = FastAPI()
 
+app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"])
 
 database_model.Base.metadata.create_all(bind=engine)
 
